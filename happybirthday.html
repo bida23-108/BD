@@ -108,6 +108,7 @@
   <div class="hidden-video">
   <iframe width="0" height="0" src="https://www.youtube.com/embed/2lKw4IL2Hks" title="Late night r&amp;b playlist 😮‍💨(partynextdoor, jhene aiko, sza ect)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
+  <div id="player"></div>
 
   <canvas id="confetti"></canvas>
   
@@ -166,6 +167,36 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
+    let tag = document.createElement('script');
+  tag.src = "https://youtu.be/2lKw4IL2Hks;
+  let firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  let player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '0',
+      width: '0',
+      videoId: '2lKw4IL2Hks',
+      playerVars: {
+        autoplay: 1,
+        loop: 1,
+        playlist: '2lKw4IL2Hks',
+        controls: 0,
+        mute: 1, // Start muted
+      },
+      events: {
+        onReady: onPlayerReady
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    document.body.addEventListener('click', () => {
+      player.unMute();  // Unmute after user interaction
+    }, { once: true });
+    event.target.playVideo();
+  }
   </script>
 </body>
 </html>

@@ -8,7 +8,9 @@
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100vh;
       background: linear-gradient(to right, #007BFF, #00C6FF);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
@@ -18,12 +20,13 @@
     .container {
       position: relative;
       z-index: 1;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1.5rem;
+      box-sizing: border-box;
     }
 
     .card {
@@ -32,10 +35,11 @@
       border-radius: 20px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
       max-width: 600px;
+      width: 100%;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
       white-space: nowrap;
       overflow: hidden;
@@ -65,23 +69,24 @@
       to { opacity: 1; }
     }
 
-.balloon {
-  font-size: 4rem;
-  opacity: 0;
-  animation: fadeInBounce 1s ease-in forwards, bounce 3s ease-in-out infinite;
-  animation-delay: 4s;
-  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
-}
+    .balloon {
+      font-size: clamp(2rem, 8vw, 4rem);
+      opacity: 0;
+      animation: fadeInBounce 1s ease-in forwards, bounce 3s ease-in-out infinite;
+      animation-delay: 4s;
+      font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+      margin: 0.5rem;
+    }
 
-@keyframes fadeInBounce {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+    @keyframes fadeInBounce {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
 
     .hidden-video {
       position: absolute;
@@ -94,22 +99,18 @@
       left: 0;
       z-index: 0;
       pointer-events: none;
+      width: 100vw;
+      height: 100vh;
     }
   </style>
 </head>
 <body>
-  <!-- Hidden YouTube Music -->
   <div class="hidden-video">
-    <iframe width="0" height="0"
-      src="https://www.youtube.com/embed/90wVvV_1JgE?autoplay=1&loop=1&playlist=90wVvV_1JgE"
-      frameborder="0"
-      allow="autoplay"
-    ></iframe>
+  <iframe width="0" height="0" src="https://www.youtube.com/embed/2lKw4IL2Hks" title="Late night r&amp;b playlist 😮‍💨(partynextdoor, jhene aiko, sza ect)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 
-  <!-- Confetti Canvas -->
   <canvas id="confetti"></canvas>
-
+  
   <div class="container">
     <div class="card">
       <div class="balloon">🎈🎉🎈</div>
@@ -117,9 +118,7 @@
       <p>Nasty 19!</p>
       <div class="balloon">🎈🎁🎈</div>
     </div>
-  </div>
-
-  <!-- Confetti Burst Script -->
+  </div>  
   <script>
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
@@ -141,7 +140,6 @@
         opacity: 1
       });
     }
-
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let p of pieces) {
@@ -163,6 +161,7 @@
     }
 
     draw();
+
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;

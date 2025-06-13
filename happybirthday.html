@@ -65,18 +65,23 @@
       to { opacity: 1; }
     }
 
-    .balloon {
-      font-size: 4rem;
-      animation: float 3s ease-in-out infinite;
-      animation-delay: 4s;
-      opacity: 0;
-      animation-fill-mode: forwards;
-    }
+.balloon {
+  font-size: 4rem;
+  opacity: 0;
+  animation: fadeInBounce 1s ease-in forwards, bounce 3s ease-in-out infinite;
+  animation-delay: 4s;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+}
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
+@keyframes fadeInBounce {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
 
     .hidden-video {
       position: absolute;
